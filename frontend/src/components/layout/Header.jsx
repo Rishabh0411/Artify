@@ -1,11 +1,12 @@
-// frontend/src/components/layout/Header.jsx
+// frontend/src/components/common/Header.jsx
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Search, Heart, ShoppingCart, LogOut } from 'lucide-react';
 import { useWishlist } from '../wishlist/WishlistContext';
 import { useCart } from '../cart/CartContext';
 import { useAuth } from '../auth/AuthContext';
-import PP from "../../assets/PP.jpeg"; // Adjusted path
+// Assuming you have a default profile picture asset
+import PP from '../../assets/PP.jpeg'; 
 
 const Header = () => {
   const location = useLocation();
@@ -34,87 +35,65 @@ const Header = () => {
       padding: '12px 40px',
       borderBottom: '1px solid #e6edf4',
       backgroundColor: '#f8fefa',
-      minHeight: '60px'
+      minHeight: '60px',
+      zIndex: 20, // Ensure header is on top
+      position: 'sticky',
+      top: 0
     }}>
+      {/* Left section: Logo and Navigation */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
         <Link to="/" style={{ textDecoration: 'none' }}>
           <h2 style={{ 
-            color: '#0c151d', 
             fontSize: '24px', 
             fontWeight: 'bold', 
+            color: '#0c151d', 
             margin: 0,
-            letterSpacing: '-0.025em'
+            fontFamily: 'system-ui, -apple-system, sans-serif'
           }}>
-            Art??
+            Artify
           </h2>
         </Link>
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-          <Link 
-            to="/" 
-            style={{ 
-              textDecoration: 'none', 
-              color: isActive('/') ? '#4574a1' : '#6b7280', 
-              fontWeight: isActive('/') ? '600' : '500',
-              transition: 'color 0.2s ease'
-            }}
-          >
-            Home
-          </Link>
-          <Link 
-            to="/shop" 
-            style={{ 
-              textDecoration: 'none', 
-              color: isActive('/shop') ? '#4574a1' : '#6b7280', 
-              fontWeight: isActive('/shop') ? '600' : '500',
-              transition: 'color 0.2s ease'
-            }}
-          >
-            Shop
-          </Link>
-          {isAuthenticated && (
-            <>
+        <nav>
+          <ul style={{ display: 'flex', gap: '24px', listStyle: 'none', padding: 0, margin: 0 }}>
+            <li>
               <Link 
-                to="/feed" 
+                to="/shop" 
                 style={{ 
                   textDecoration: 'none', 
-                  color: isActive('/feed') ? '#4574a1' : '#6b7280', 
-                  fontWeight: isActive('/feed') ? '600' : '500',
-                  transition: 'color 0.2s ease'
+                  fontSize: '16px', 
+                  fontWeight: '500', 
+                  color: isActive('/shop') ? '#4574a1' : '#6b7280',
+                  transition: 'color 0.2s ease',
+                  '&:hover': { color: '#4574a1' }
                 }}
               >
-                Feed
+                Shop
               </Link>
-              {user?.isArtist && (
-                 <Link 
-                  to="/create" 
-                  style={{ 
-                    textDecoration: 'none', 
-                    color: isActive('/create') ? '#4574a1' : '#6b7280', 
-                    fontWeight: isActive('/create') ? '600' : '500',
-                    transition: 'color 0.2s ease'
-                  }}
-                >
-                  Create
-                </Link>
-              )}
+            </li>
+            {/* Add more navigation links as needed */}
+            {/* <li>
               <Link 
-                to="/community" 
+                to="/artists" 
                 style={{ 
                   textDecoration: 'none', 
-                  color: isActive('/community') ? '#4574a1' : '#6b7280', 
-                  fontWeight: isActive('/community') ? '600' : '500',
-                  transition: 'color 0.2s ease'
+                  fontSize: '16px', 
+                  fontWeight: '500', 
+                  color: isActive('/artists') ? '#4574a1' : '#6b7280',
+                  transition: 'color 0.2s ease',
+                  '&:hover': { color: '#4574a1' }
                 }}
               >
-                Community
+                Artists
               </Link>
-            </>
-          )}
+            </li> */}
+          </ul>
         </nav>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <Link to="/search" style={{ textDecoration: 'none', color: 'inherit' }}>
+      {/* Right section: Search, Wishlist, Cart, Auth */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+        {/* Search Icon */}
+        <Link to="/search" style={{ textDecoration: 'none' }}>
           <button style={{
             border: 'none',
             backgroundColor: 'transparent',
@@ -123,7 +102,7 @@ const Header = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#6b7280',
+            color: isActive('/search') ? '#4574a1' : '#6b7280',
             width: '40px',
             height: '40px',
             transition: 'all 0.2s ease'
@@ -133,7 +112,8 @@ const Header = () => {
             <Search size={20} />
           </button>
         </Link>
-        
+
+        {/* Wishlist Icon */}
         <Link to="/wishlist" style={{ textDecoration: 'none', position: 'relative' }}>
           <button style={{
             border: 'none',
@@ -143,14 +123,14 @@ const Header = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#6b7280',
+            color: isActive('/wishlist') ? '#dc3545' : '#6b7280',
             width: '40px',
             height: '40px',
             transition: 'all 0.2s ease'
           }}
           title="Wishlist"
           >
-            <Heart size={20} />
+            <Heart size={20} fill={isActive('/wishlist') ? '#dc3545' : 'none'} />
             {wishlistCount > 0 && (
               <span style={{
                 position: 'absolute',
@@ -159,20 +139,19 @@ const Header = () => {
                 backgroundColor: '#dc3545',
                 color: '#ffffff',
                 borderRadius: '50%',
+                padding: '2px 6px',
                 fontSize: '10px',
-                fontWeight: '600',
-                width: '18px',
-                height: '18px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
+                fontWeight: 'bold',
+                minWidth: '20px',
+                textAlign: 'center'
               }}>
                 {wishlistCount}
               </span>
             )}
           </button>
         </Link>
-        
+
+        {/* Cart Icon */}
         <Link to="/cart" style={{ textDecoration: 'none', position: 'relative' }}>
           <button style={{
             border: 'none',
@@ -182,7 +161,7 @@ const Header = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#6b7280',
+            color: isActive('/cart') ? '#4574a1' : '#6b7280',
             width: '40px',
             height: '40px',
             transition: 'all 0.2s ease'
@@ -195,16 +174,14 @@ const Header = () => {
                 position: 'absolute',
                 top: '-5px',
                 right: '-5px',
-                backgroundColor: '#007bff',
+                backgroundColor: '#4574a1',
                 color: '#ffffff',
                 borderRadius: '50%',
+                padding: '2px 6px',
                 fontSize: '10px',
-                fontWeight: '600',
-                width: '18px',
-                height: '18px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
+                fontWeight: 'bold',
+                minWidth: '20px',
+                textAlign: 'center'
               }}>
                 {cartCount}
               </span>
@@ -212,19 +189,25 @@ const Header = () => {
           </button>
         </Link>
 
+        {/* Auth/Profile Section */}
         {isAuthenticated ? (
           <>
-            <Link to={`/profile/${user?.id || 'me'}`} style={{ textDecoration: 'none' }}>
-              <div style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                backgroundImage: `url(${PP})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                flexShrink: 0,
-                cursor: 'pointer'
-              }}>
+            <Link to={`/profile/${user.id}`} style={{ textDecoration: 'none' }}>
+              <div
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundImage: `url(${PP})`, // Use actual user profile pic if available
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  flexShrink: 0,
+                  cursor: 'pointer',
+                  border: isActive(`/profile/${user.id}`) ? '2px solid #4574a1' : '2px solid transparent',
+                  transition: 'border-color 0.2s ease'
+                }}
+                title={user.username || "My Profile"}
+              >
               </div>
             </Link>
             <button

@@ -12,11 +12,12 @@ const ProductGrid = ({ products }) => {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '40px',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#ffffff', // Keep white background for "no results" message
         borderRadius: '12px',
         minHeight: '400px',
         textAlign: 'center',
-        color: '#6b7280'
+        color: '#6b7280',
+        boxShadow: '0 2px 10px rgba(0,0,0,0.05)' // Keep shadow for "no results" box
       }}>
         <h3 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '12px', color: '#0c151d' }}>
           No Artworks Found
@@ -32,12 +33,14 @@ const ProductGrid = ({ products }) => {
     <div style={{
       flex: 1,
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', // Responsive columns
-      gap: '24px',
-      padding: '20px',
-      backgroundColor: '#ffffff',
-      borderRadius: '12px',
-      boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
+      gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', 
+      gap: '24px', // Gap between product cards
+      // --- REMOVED THESE STYLES ---
+      // padding: '20px',
+      // backgroundColor: '#ffffff',
+      // borderRadius: '12px',
+      // boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
+      // ---
     }}>
       {products.map(product => (
         <ProductCard key={product.id} product={product} />

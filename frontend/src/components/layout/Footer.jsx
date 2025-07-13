@@ -1,84 +1,108 @@
-// frontend/src/components/layout/Footer.jsx
+// frontend/src/components/common/Footer.jsx
+import React from 'react';
 import { Twitter, Facebook, Instagram } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer style={{ display: 'flex', justifyContent: 'center', backgroundColor: "transparent", padding: '60px 20px' }}>
-      <div style={{ display: 'flex', maxWidth: '960px', flex: 1, flexDirection: 'column' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', textAlign: 'center' }}>
-          {/* Navigation Links */}
-          <div style={{ 
-            display: 'flex', 
-            flexWrap: 'wrap', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            gap: '60px'
-          }}>
-            <a style={{ 
-              color: '#4a90e2', 
-              fontSize: '16px', 
-              fontWeight: 'normal', 
-              textDecoration: 'none',
-              fontFamily: 'system-ui, -apple-system, sans-serif'
-            }} href="#">About</a>
-            <a style={{ 
-              color: '#4a90e2', 
-              fontSize: '16px', 
-              fontWeight: 'normal', 
-              textDecoration: 'none',
-              fontFamily: 'system-ui, -apple-system, sans-serif'
-            }} href="#">Contact</a>
-            <a style={{ 
-              color: '#4a90e2', 
-              fontSize: '16px', 
-              fontWeight: 'normal', 
-              textDecoration: 'none',
-              fontFamily: 'system-ui, -apple-system, sans-serif'
-            }} href="#">FAQ</a>
-            <a style={{ 
-              color: '#4a90e2', 
-              fontSize: '16px', 
-              fontWeight: 'normal', 
-              textDecoration: 'none',
-              fontFamily: 'system-ui, -apple-system, sans-serif'
-            }} href="#">Terms of Service</a>
-            <a style={{ 
-              color: '#4a90e2', 
-              fontSize: '16px', 
-              fontWeight: 'normal', 
-              textDecoration: 'none',
-              fontFamily: 'system-ui, -apple-system, sans-serif'
-            }} href="#">Privacy Policy</a>
-          </div>
-          
-          {/* Social Media Icons */}
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'center', 
-            gap: '24px' 
-          }}>
-            <a href="#" style={{ color: '#4a90e2' }}>
-              <Twitter size={24} />
-            </a>
-            <a href="#" style={{ color: '#4a90e2' }}>
-              <Instagram size={24} />
-            </a>
-            <a href="#" style={{ color: '#4a90e2' }}>
-              <Facebook size={24} />
-            </a>
-          </div>
-          
-          {/* Copyright */}
-          <p style={{ 
-            color: '#4a90e2', 
+    <footer style={{ 
+      display: 'flex', 
+      justifyContent: 'center', 
+      backgroundColor: '#ffffff', // A light background for the footer
+      padding: '60px 20px',
+      borderTop: '1px solid #e6edf4',
+      marginTop: 'auto' // Pushes footer to the bottom
+    }}>
+      <div style={{ 
+        display: 'flex', 
+        maxWidth: '960px', 
+        flex: 1, 
+        flexDirection: 'column',
+        alignItems: 'center', // Center content horizontally
+        gap: '40px' 
+      }}>
+        {/* Navigation Links */}
+        <div style={{ 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          alignItems: 'center', 
+          justifyContent: 'center', 
+          gap: '30px 60px' // Row gap and column gap
+        }}>
+          <a style={{ 
+            color: '#4574a1', 
             fontSize: '16px', 
             fontWeight: 'normal', 
-            margin: 0,
-            fontFamily: 'system-ui, -apple-system, sans-serif'
-          }}>
-            &copy; 2023 Art??. All rights reserved.
-          </p>
+            textDecoration: 'none',
+            fontFamily: 'system-ui, -apple-system, sans-serif',
+            transition: 'color 0.2s ease',
+            '&:hover': { color: '#0c151d' }
+          }} href="#">About</a>
+          <a style={{ 
+            color: '#4574a1', 
+            fontSize: '16px', 
+            fontWeight: 'normal', 
+            textDecoration: 'none',
+            fontFamily: 'system-ui, -apple-system, sans-serif',
+            transition: 'color 0.2s ease',
+            '&:hover': { color: '#0c151d' }
+          }} href="#">Contact</a>
+          <a style={{ 
+            color: '#4574a1', 
+            fontSize: '16px', 
+            fontWeight: 'normal', 
+            textDecoration: 'none',
+            fontFamily: 'system-ui, -apple-system, sans-serif',
+            transition: 'color 0.2s ease',
+            '&:hover': { color: '#0c151d' }
+          }} href="#">FAQ</a>
+          <a style={{ 
+            color: '#4574a1', 
+            fontSize: '16px', 
+            fontWeight: 'normal', 
+            textDecoration: 'none',
+            fontFamily: 'system-ui, -apple-system, sans-serif',
+            transition: 'color 0.2s ease',
+            '&:hover': { color: '#0c151d' }
+          }} href="#">Terms of Service</a>
+          <a style={{ 
+            color: '#4574a1', 
+            fontSize: '16px', 
+            fontWeight: 'normal', 
+            textDecoration: 'none',
+            fontFamily: 'system-ui, -apple-system, sans-serif',
+            transition: 'color 0.2s ease',
+            '&:hover': { color: '#0c151d' }
+          }} href="#">Privacy Policy</a>
         </div>
+        
+        {/* Social Media Icons */}
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          gap: '24px' 
+        }}>
+          <a href="#" style={{ color: '#4574a1', transition: 'color 0.2s ease', '&:hover': { color: '#0c151d' } }}>
+            <Twitter size={24} />
+          </a>
+          <a href="#" style={{ color: '#4574a1', transition: 'color 0.2s ease', '&:hover': { color: '#0c151d' } }}>
+            <Instagram size={24} />
+          </a>
+          <a href="#" style={{ color: '#4574a1', transition: 'color 0.2s ease', '&:hover': { color: '#0c151d' } }}>
+            <Facebook size={24} />
+          </a>
+        </div>
+        
+        {/* Copyright */}
+        <p style={{ 
+          color: '#6b7280', 
+          fontSize: '14px', 
+          fontWeight: 'normal', 
+          margin: 0,
+          fontFamily: 'system-ui, -apple-system, sans-serif',
+          textAlign: 'center'
+        }}>
+          © {new Date().getFullYear()} ArtVista. All rights reserved.
+        </p>
       </div>
     </footer>
   );

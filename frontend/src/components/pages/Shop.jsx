@@ -10,6 +10,7 @@ const Shop = () => {
   const [priceRange, setPriceRange] = useState([0, Infinity]); // Initial range: 0 to Infinity
   const [sortBy, setSortBy] = useState('newest');
   const [searchQuery, setSearchQuery] = useState('');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // State for sidebar visibility
 
   // Filter mockData to get only artworks and map to ProductCard format
   const allShopProducts = useMemo(() => {
@@ -33,13 +34,9 @@ const Shop = () => {
   // Filter products based on selected criteria
   const filteredProducts = useMemo(() => {
     return allShopProducts.filter(product => {
-      // Category Filter
-      const matchesCategory = selectedCategory === 'all' || product.category.toLowerCase() === selectedCategory.toLowerCase();
-
-      // Price Range Filter
+      const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
       const matchesPrice = product.price >= priceRange[0] && product.price <= priceRange[1];
 
-      // Search Query Filter (Checks title and artist name)
       const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                            product.artist.toLowerCase().includes(searchQuery.toLowerCase());
       
@@ -64,34 +61,62 @@ const Shop = () => {
     });
   }, [filteredProducts, sortBy]);
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(prev => !prev);
+  };
+
   return (
     <div style={{ backgroundColor: '#f8fefa', minHeight: '100vh' }}>
+      {/* ShopHeader */}
       <ShopHeader 
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         sortBy={sortBy}
         setSortBy={setSortBy}
         totalProducts={filteredProducts.length}
+        toggleSidebar={toggleSidebar}
+        isSidebarOpen={isSidebarOpen}
       />
       
-      <div style={{ display: 'flex', maxWidth: '1200px', margin: '0 auto', gap: '24px', padding: '24px' }}>
-        {/* Filter Sidebar (only visible on larger screens) */}
-        <div style={{
-          display: 'block', // Default to block
-          '@media (max-width: 768px)': { // Hide on small screens
-            display: 'none'
-          }
-        }}>
-          <FilterSidebar
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            priceRange={priceRange}
-            setPriceRange={setPriceRange}
-          />
-        </div>
+      <div style={{ 
+        display: 'flex', 
+        // Removed maxWidth and margin: 'auto' to allow full width
+        margin: '24px 0', // Top/bottom margin, no auto horizontal margin
+        gap: '24px', 
+        padding: '0 40px', // Add padding to the sides to prevent content from touching edges
+        alignItems: 'flex-start' // Align items to the top
+      }}>
+        {/* Filter Sidebar */}
+        {isSidebarOpen && ( 
+          <div style={{
+            flexShrink: 0, 
+            width: '280px', // Fixed width for sidebar
+            '@media (max-width: 1024px)': { 
+              width: '220px',
+            },
+            '@media (max-width: 768px)': {
+              display: 'none', // Hide on smaller screens
+            },
+            backgroundColor: '#ffffff', // White background for the sidebar itself
+            borderRadius: '8px',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.08)', // Subtle shadow for elevation
+            padding: '20px', // Internal padding for sidebar content
+          }}>
+            <FilterSidebar
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              priceRange={priceRange}
+              setPriceRange={setPriceRange}
+            />
+          </div>
+        )}
         
-        {/* Product Grid */}
-        <ProductGrid products={sortedProducts} />
+        {/* Product Grid Container */}
+        <div style={{ 
+          flexGrow: 1, 
+        }}> 
+          <ProductGrid products={sortedProducts} />
+        </div>
       </div>
     </div>
   );
