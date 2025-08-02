@@ -1,13 +1,12 @@
-// frontend/src/components/artwork/ArtworkDetail.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Heart, ShoppingCart, Share2 } from 'lucide-react';
 import { useWishlist } from '../wishlist/WishlistContext';
 import { useCart } from '../cart/CartContext';
-import { mockData } from '../../data/mockSearchData'; // Assuming mock data for artworks
+import { mockData } from '../../data/mockSearchData';
 
 const ArtworkDetail = () => {
-  const { id } = useParams(); // Get artwork ID from URL
+  const { id } = useParams(); 
   const navigate = useNavigate();
   const { toggleWishlistItem, isInWishlist } = useWishlist();
   const { addToCart, isInCart } = useCart();
@@ -20,8 +19,6 @@ const ArtworkDetail = () => {
     setLoading(true);
     setError(null);
 
-    // Simulate fetching artwork data based on ID
-    // In a real app, you'd make an API call here: fetch(`/api/artworks/${id}`)
     const foundArtwork = mockData.find(item => item.id === id && item.type === 'artwork');
 
     if (foundArtwork) {
@@ -38,7 +35,7 @@ const ArtworkDetail = () => {
         year: foundArtwork.year,
         likes: foundArtwork.likes,
         availability: foundArtwork.availability,
-        isArtist: foundArtwork.type === 'artist' // This is redundant for artwork detail but keeping it consistent with mock data structure
+        isArtist: foundArtwork.type === 'artist' 
       });
     } else {
       setError("Artwork not found.");
@@ -63,7 +60,6 @@ const ArtworkDetail = () => {
 
   const handleShare = () => {
     if (artwork) {
-      // Basic share functionality (can be expanded)
       if (navigator.share) {
         navigator.share({
           title: artwork.title,
@@ -186,7 +182,7 @@ const styles = {
     justifyContent: 'center',
     padding: '40px 20px',
     backgroundColor: '#f8fefa',
-    minHeight: 'calc(100vh - 120px)', // Adjust based on header/footer
+    minHeight: 'calc(100vh - 120px)', 
   },
   detailCard: {
     display: 'flex',
@@ -196,9 +192,9 @@ const styles = {
     maxWidth: '1000px',
     width: '100%',
     overflow: 'hidden',
-    flexDirection: 'row', // Default for larger screens
+    flexDirection: 'row', 
     '@media (max-width: 768px)': {
-      flexDirection: 'column', // Stack on smaller screens
+      flexDirection: 'column', 
     },
   },
   imageContainer: {
@@ -219,7 +215,7 @@ const styles = {
     maxWidth: '100%',
     maxHeight: '500px',
     borderRadius: '8px',
-    objectFit: 'contain', // Ensure the entire image is visible
+    objectFit: 'contain', 
   },
   infoContainer: {
     flex: 1.2,

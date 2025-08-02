@@ -1,4 +1,3 @@
-// frontend/src/components/product/ProductDetailPage.jsx
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { mockData } from '../../data/mockSearchData';
@@ -18,13 +17,12 @@ const ProductDetailPage = () => {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    // Simulate fetching data based on ID
     const foundProduct = mockData.find(item => item.id === id && item.type === 'artwork');
 
     if (foundProduct) {
       setProduct({
         ...foundProduct,
-        inStock: foundProduct.availability === 'for sale', // Add inStock property
+        inStock: foundProduct.availability === 'for sale',
       });
     } else {
       setError('Product not found.');
@@ -193,7 +191,7 @@ const ProductDetailPage = () => {
               <Heart size={20} fill={isLiked ? '#dc3545' : 'none'} stroke={isLiked ? '#dc3545' : '#4574a1'} />
             </button>
             <button
-              onClick={() => { /* Share logic */ console.log('Share product:', product.title); }}
+              onClick={() => {console.log('Share product:', product.title); }}
               style={{
                 ...styles.actionButton,
                 backgroundColor: 'transparent',

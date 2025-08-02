@@ -1,4 +1,3 @@
-// frontend/src/components/wishlist/Wishlist.jsx
 import React from 'react';
 import { useWishlist } from './WishlistContext';
 import { useCart } from '../cart/CartContext';
@@ -12,11 +11,10 @@ const Wishlist = () => {
   const handleAddToCart = (product) => {
     addToCart(product);
     console.log('Added to cart:', product.title);
-    removeFromWishlist(product.id); // Remove from wishlist after adding to cart
+    removeFromWishlist(product.id); 
   };
 
   const handleShare = (product) => {
-    // Share logic here
     console.log('Share:', product.title);
   };
 
@@ -35,7 +33,7 @@ const Wishlist = () => {
           display: 'flex',
           gap: '20px',
           padding: '20px',
-          flexWrap: 'wrap' // Allow wrapping on smaller screens
+          flexWrap: 'wrap'
         }}>
           {/* Product Image */}
           <div style={{
@@ -90,7 +88,7 @@ const Wishlist = () => {
             flexDirection: 'column',
             alignItems: 'flex-end',
             gap: '12px',
-            minWidth: '100px' // Ensure enough width for buttons
+            minWidth: '100px'
           }}>
             <button
               onClick={() => handleAddToCart(product)}

@@ -1,11 +1,9 @@
-// frontend/src/components/shop/ProductCard.jsx
 import React, { useState } from 'react';
 import { Heart, ShoppingCart, Eye, Share2, X, ZoomIn, ZoomOut } from 'lucide-react';
 import { useWishlist } from '../wishlist/WishlistContext';
 import { useCart } from '../cart/CartContext';
 import { Link } from 'react-router-dom';
 
-// Image Zoom Modal Component
 const ImageZoomModal = ({ product, isOpen, onClose }) => {
   const [zoom, setZoom] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -13,7 +11,6 @@ const ImageZoomModal = ({ product, isOpen, onClose }) => {
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
   const handleModalClick = (e) => {
-    // Close modal when clicking on backdrop
     if (e.target === e.currentTarget) {
       onClose();
     }
@@ -246,7 +243,6 @@ const ProductCard = ({ product }) => {
   const handleShare = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    // Share logic here
     console.log('Share:', product.title);
   };
 

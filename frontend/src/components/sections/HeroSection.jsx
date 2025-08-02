@@ -1,6 +1,5 @@
-// frontend/src/components/sections/HeroSection.jsx
 import React from 'react';
-import hi from "../../assets/hi.jpg"; // Adjusted path
+import hi from "../../assets/hi.jpg";
 
 const HeroSection = () => {
   return (

@@ -1,4 +1,3 @@
-// frontend/src/components/shop/ShopHeader.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, Filter, Grid, List, ChevronDown, X } from 'lucide-react';
 
@@ -23,12 +22,10 @@ const ShopHeader = ({
   const searchInputRef = useRef(null);
   const sortDropdownRef = useRef(null);
 
-  // Update local search when prop changes
   useEffect(() => {
     setLocalSearchQuery(searchQuery);
   }, [searchQuery]);
 
-  // Handle search input changes with debouncing
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (localSearchQuery !== searchQuery && onSearch) {
@@ -39,7 +36,6 @@ const ShopHeader = ({
     return () => clearTimeout(timeoutId);
   }, [localSearchQuery, searchQuery, onSearch]);
 
-  // Handle search submit
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (onSearch) {
@@ -47,7 +43,6 @@ const ShopHeader = ({
     }
   };
 
-  // Handle search clear
   const handleSearchClear = () => {
     setLocalSearchQuery('');
     if (onSearch) {
@@ -56,20 +51,17 @@ const ShopHeader = ({
     searchInputRef.current?.focus();
   };
 
-  // Handle sort change
   const handleSortChange = (newSortBy) => {
     setSortBy(newSortBy);
     setShowSortDropdown(false);
   };
 
-  // Handle view mode change
   const handleViewModeChange = (mode) => {
     if (setViewMode) {
       setViewMode(mode);
     }
   };
 
-  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (sortDropdownRef.current && !sortDropdownRef.current.contains(event.target)) {
@@ -81,7 +73,6 @@ const ShopHeader = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Get active filters count
   const getActiveFiltersCount = () => {
     if (!filters) return 0;
     return Object.values(filters).filter(value => 

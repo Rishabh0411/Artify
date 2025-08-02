@@ -1,5 +1,4 @@
-// frontend/src/components/sections/FeaturedArtists.jsx
-import hilu from "../../assets/hilu.jpg"; // Adjusted path
+import hilu from "../../assets/hilu.jpg"; 
 import { Link } from 'react-router-dom'; 
 
 const FeaturedArtists = () => {
@@ -81,7 +80,7 @@ const FeaturedArtists = () => {
         margin: 0,
         maxWidth: '1200px',
         margin: '20px auto 12px auto',
-        paddingLeft: '24px' // Consistent padding
+        paddingLeft: '24px' 
       }}>
         Featured Artists
       </h2>
@@ -92,9 +91,9 @@ const FeaturedArtists = () => {
           alignItems: 'flex-start',
           gap: '32px',
           overflowX: 'auto',
-          padding: '16px 8px', // Add some horizontal padding for scrollbar
-          scrollbarWidth: 'none', /* Firefox */
-          msOverflowStyle: 'none',  /* IE and Edge */
+          padding: '16px 8px', 
+          scrollbarWidth: 'none', 
+          msOverflowStyle: 'none',  
         }}>
           {/* Hide scrollbar for webkit browsers */}
           <style>{`

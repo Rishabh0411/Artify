@@ -1,8 +1,7 @@
-// frontend/src/components/pages/Home.jsx
 import React from 'react';
-import HeroSection from '../sections/HeroSection'; // Adjusted path
-import FeaturedArtists from '../sections/FeaturedArtists'; // Adjusted path
-import FeaturedArtworks from '../sections/FeaturedArtworks'; // Adjusted path
+import HeroSection from '../sections/HeroSection'; 
+import FeaturedArtists from '../sections/FeaturedArtists'; 
+import FeaturedArtworks from '../sections/FeaturedArtworks'; 
 
 const Home = () => {
   return (

@@ -1,4 +1,3 @@
-// frontend/src/App.jsx (Example structure)
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/pages/Home';
@@ -10,7 +9,7 @@ import Footer from './components/layout/Footer';
 // import Login from './components/auth/Login';
 // import Register from './components/auth/Register';
 // import Profile from './components/user/Profile';
-import ProductDetailPage from './components/shop/ProductDetailPage'; // Import the new component
+import ProductDetailPage from './components/shop/ProductDetailPage';
 import { CartProvider } from './components/cart/CartContext';
 import { WishlistProvider } from './components/wishlist/WishlistContext';
 import { AuthProvider } from './components/auth/AuthContext';
@@ -31,7 +30,7 @@ function App() {
               {/* <Route path="/login" element={<Login />} /> */}
               {/* <Route path="/register" element={<Register />} /> */}
               {/* <Route path="/profile/:id" element={<Profile />} /> */}
-              <Route path="/artwork/:id" element={<ProductDetailPage />} /> {/* New route */}
+              <Route path="/artwork/:id" element={<ProductDetailPage />} /> 
             </Routes>
             <Footer />
           </WishlistProvider>

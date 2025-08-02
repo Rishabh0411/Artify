@@ -1,4 +1,3 @@
-// frontend/src/components/auth/AuthContext.jsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext(null);
@@ -25,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   }, [user, token]);
 
   const login = (userData, userToken) => {
-    setUser(userData); // e.g., { id: 'ID', username: 'XYZ', isArtist: true }
+    setUser(userData);
     setToken(userToken);
   };
 

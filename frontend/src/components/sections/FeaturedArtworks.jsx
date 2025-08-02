@@ -1,5 +1,4 @@
-// frontend/src/components/sections/FeaturedArtworks.jsx
-import hiiii from "../../assets/hiiii.jpg"; // Adjusted path
+import hiiii from "../../assets/hiiii.jpg";
 import { Link } from 'react-router-dom';
 
 const FeaturedArtworks = () => {
@@ -38,8 +37,6 @@ const FeaturedArtworks = () => {
               lineHeight: '1.4',
               margin: '0',
               cursor: 'pointer', 
-              // Using inline style for hover pseudo-class (less common but works)
-              // For more complex hover effects, consider a CSS file or styled-components
               transition: 'text-decoration 0.2s ease',
               ':hover': {
                 textDecoration: 'underline'
@@ -73,7 +70,7 @@ const FeaturedArtworks = () => {
         margin: '0',
         maxWidth: '1200px',
         margin: '20px auto 12px auto',
-        paddingLeft: '24px' // Consistent padding
+        paddingLeft: '24px'
       }}>
         Featured Artworks
       </h2>
@@ -82,8 +79,8 @@ const FeaturedArtworks = () => {
         display: 'flex',
         overflowX: 'auto',
         overflowY: 'hidden',
-        scrollbarWidth: 'none', /* Firefox */
-        msOverflowStyle: 'none',  /* IE and Edge */
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none', 
       }}>
         {/* Hide scrollbar for webkit browsers */}
         <style>{`
@@ -94,9 +91,9 @@ const FeaturedArtworks = () => {
         <div style={{
           display: 'flex',
           alignItems: 'stretch',
-          padding: '16px 24px', // Consistent padding
+          padding: '16px 24px', 
           gap: '24px',
-          minWidth: 'fit-content' // Ensure content doesn't wrap
+          minWidth: 'fit-content' 
         }}>
           {artworks.map((artwork, index) => (
             <ArtworkCard 
@@ -105,7 +102,7 @@ const FeaturedArtworks = () => {
               title={artwork.title} 
               artist={artwork.artist} 
               image={artwork.image} 
-              size="normal" // Or "large" for some
+              size="normal" 
               artistId={artwork.artistId}
             />
           ))}

@@ -1,4 +1,3 @@
-// frontend/src/components/common/Footer.jsx
 import React from 'react';
 import { Twitter, Facebook, Instagram } from 'lucide-react';
 
@@ -7,17 +6,17 @@ const Footer = () => {
     <footer style={{ 
       display: 'flex', 
       justifyContent: 'center', 
-      backgroundColor: '#ffffff', // A light background for the footer
+      backgroundColor: '#ffffff',
       padding: '60px 20px',
       borderTop: '1px solid #e6edf4',
-      marginTop: 'auto' // Pushes footer to the bottom
+      marginTop: 'auto' 
     }}>
       <div style={{ 
         display: 'flex', 
         maxWidth: '960px', 
         flex: 1, 
         flexDirection: 'column',
-        alignItems: 'center', // Center content horizontally
+        alignItems: 'center', 
         gap: '40px' 
       }}>
         {/* Navigation Links */}
@@ -26,7 +25,7 @@ const Footer = () => {
           flexWrap: 'wrap', 
           alignItems: 'center', 
           justifyContent: 'center', 
-          gap: '30px 60px' // Row gap and column gap
+          gap: '30px 60px'
         }}>
           <a style={{ 
             color: '#4574a1', 

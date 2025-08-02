@@ -1,11 +1,9 @@
-// frontend/src/components/common/Header.jsx
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Search, Heart, ShoppingCart, LogOut } from 'lucide-react';
 import { useWishlist } from '../wishlist/WishlistContext';
 import { useCart } from '../cart/CartContext';
 import { useAuth } from '../auth/AuthContext';
-// Assuming you have a default profile picture asset
 import PP from '../../assets/PP.jpeg'; 
 
 const Header = () => {
@@ -23,8 +21,7 @@ const Header = () => {
 
   const handleLogout = () => {
     logout();
-    // Optionally redirect to home or login page after logout
-    // navigate('/'); 
+
   };
 
   return (
@@ -36,7 +33,7 @@ const Header = () => {
       borderBottom: '1px solid #e6edf4',
       backgroundColor: '#f8fefa',
       minHeight: '60px',
-      zIndex: 20, // Ensure header is on top
+      zIndex: 20, 
       position: 'sticky',
       top: 0
     }}>
@@ -198,7 +195,7 @@ const Header = () => {
                   width: '40px',
                   height: '40px',
                   borderRadius: '50%',
-                  backgroundImage: `url(${PP})`, // Use actual user profile pic if available
+                  backgroundImage: `url(${PP})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   flexShrink: 0,

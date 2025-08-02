@@ -1,4 +1,3 @@
-// frontend/src/components/cart/Cart.jsx
 import React from 'react';
 import { useCart } from './CartContext';
 import { ShoppingCart, X, Plus, Minus, Heart, Share2, CreditCard } from 'lucide-react';
@@ -23,7 +22,6 @@ const Cart = () => {
   };
 
   const handleCheckout = () => {
-    // Checkout logic here
     console.log('Proceeding to checkout...');
     alert('Proceeding to checkout (simulated). Cart will be cleared.');
     clearCart();
@@ -44,7 +42,7 @@ const Cart = () => {
           display: 'flex',
           gap: '20px',
           padding: '20px',
-          flexWrap: 'wrap' // Allow wrapping on smaller screens
+          flexWrap: 'wrap' 
         }}>
           {/* Product Image */}
           <div style={{
@@ -99,7 +97,7 @@ const Cart = () => {
             flexDirection: 'column',
             alignItems: 'flex-end',
             gap: '12px',
-            minWidth: '120px' // Ensure enough width for buttons
+            minWidth: '120px'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <button
@@ -268,7 +266,7 @@ const Cart = () => {
               border: '1px solid #e6edf4',
               padding: '30px',
               boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
-              height: 'fit-content' // Make it fit content
+              height: 'fit-content' 
             }}>
               <h2 style={{
                 fontSize: '24px',

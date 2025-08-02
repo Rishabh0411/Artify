@@ -1,12 +1,9 @@
-// frontend/src/components/shop/FilterSidebar.jsx
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, Menu, X } from 'lucide-react'; // Added Menu and X icons
+import { ChevronDown, ChevronUp, Menu, X } from 'lucide-react';
 
 const FilterSidebar = ({ selectedCategory, setSelectedCategory, priceRange, setPriceRange }) => {
-  // State for managing hamburger menu visibility
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-  // State for managing collapse/expand of each section
   const [isCategoriesCollapsed, setIsCategoriesCollapsed] = useState(false);
   const [isPriceCollapsed, setIsPriceCollapsed] = useState(false);
   const [isMediumCollapsed, setIsMediumCollapsed] = useState(false);
