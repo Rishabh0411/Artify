@@ -6,8 +6,8 @@ import Cart from './components/cart/Cart';
 import Wishlist from './components/wishlist/Wishlist';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
-// import Login from './components/auth/Login';
-// import Register from './components/auth/Register';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
 // import Profile from './components/user/Profile';
 import ProductDetailPage from './components/shop/ProductDetailPage';
 import { CartProvider } from './components/cart/CartContext';
@@ -27,8 +27,8 @@ function App() {
               <Route path="/shop" element={<Shop />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/wishlist" element={<Wishlist />} />
-              {/* <Route path="/login" element={<Login />} /> */}
-              {/* <Route path="/register" element={<Register />} /> */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
               {/* <Route path="/profile/:id" element={<Profile />} /> */}
               <Route path="/artwork/:id" element={<ProductDetailPage />} /> 
             </Routes>
