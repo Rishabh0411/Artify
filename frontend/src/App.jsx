@@ -1,5 +1,6 @@
+// src/App.jsx
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './components/auth/AuthContext';
 import { WishlistProvider } from './components/wishlist/WishlistContext';
 import { CartProvider } from './components/cart/CartContext';
@@ -26,7 +27,7 @@ function App() {
     <AuthProvider>
       <WishlistProvider>
         <CartProvider>
-          <Router>
+          {/* <Router> must be removed from here */}
             <div style={{ 
               display: 'flex', 
               flexDirection: 'column', 
@@ -103,7 +104,7 @@ function App() {
               </main>
               <Footer />
             </div>
-          </Router>
+          {/* </Router> must be removed from here */}
         </CartProvider>
       </WishlistProvider>
     </AuthProvider>
