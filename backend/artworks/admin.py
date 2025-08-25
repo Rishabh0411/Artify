@@ -8,9 +8,10 @@ class ArtworkImageInline(admin.TabularInline):
 
 @admin.register(Artwork)
 class ArtworkAdmin(admin.ModelAdmin):
-    list_display = ('title', 'artist', 'category', 'price', 'availability', 'likes_count', 'views_count', 'is_featured', 'created_at')
-    list_filter = ('availability', 'is_featured', 'is_published', 'is_approved', 'category', 'condition', 'created_at')
-    search_fields = ('title', 'description', 'artist__first_name', 'artist__last_name', 'medium')
+    list_display = ['title', 'artist', 'is_featured', 'availability', 'is_published', 'is_approved', 'price', 'created_at']
+    list_editable = ['is_featured', 'availability', 'is_published', 'is_approved', 'price']
+    list_filter = ['category', 'is_published', 'is_approved', 'is_featured', 'availability', 'created_at']
+    search_fields = ['title', 'artist__username', 'description']
     list_editable = ('is_featured', 'availability', 'is_published', 'is_approved')
     readonly_fields = ('slug', 'likes_count', 'views_count', 'created_at', 'updated_at')
     filter_horizontal = ('tags',)

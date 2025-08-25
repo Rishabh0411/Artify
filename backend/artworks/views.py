@@ -1,7 +1,7 @@
 from rest_framework import generics, status, permissions, filters
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from django_filters.rest_framework import DjangoFilterFilter
+from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Q
 from .models import Artwork, ArtworkLike, ArtworkView
 from .serializers import ArtworkSerializer, ArtworkCreateUpdateSerializer
@@ -10,7 +10,7 @@ from .filters import ArtworkFilter
 class ArtworkListView(generics.ListAPIView):
     serializer_class = ArtworkSerializer
     permission_classes = [permissions.AllowAny]
-    filter_backends = [DjangoFilterFilter, filters.SearchFilter, filters.OrderingFilter]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_class = ArtworkFilter
     search_fields = ['title', 'description', 'artist__first_name', 'artist__last_name', 'medium']
     ordering_fields = ['created_at', 'price', 'likes_count', 'views_count']
