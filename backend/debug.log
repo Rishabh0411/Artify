@@ -5,3 +5,28 @@ Bad Request: /api/auth/register/
 "OPTIONS /api/auth/login/ HTTP/1.1" 200 0
 Bad Request: /api/auth/login/
 "POST /api/auth/login/ HTTP/1.1" 400 44
+Bad Request: /api/auth/register/
+"POST /api/auth/register/ HTTP/1.1" 400 82
+"OPTIONS /api/auth/register/ HTTP/1.1" 200 0
+Bad Request: /api/auth/register/
+"POST /api/auth/register/ HTTP/1.1" 400 114
+"OPTIONS /api/auth/register/ HTTP/1.1" 200 0
+Bad Request: /api/auth/register/
+"POST /api/auth/register/ HTTP/1.1" 400 129
+"OPTIONS /api/auth/register/ HTTP/1.1" 200 0
+Bad Request: /api/auth/register/
+"POST /api/auth/register/ HTTP/1.1" 400 198
+"OPTIONS /api/auth/register/ HTTP/1.1" 200 0
+Bad Request: /api/auth/register/
+"POST /api/auth/register/ HTTP/1.1" 400 198
+"OPTIONS /api/auth/register/ HTTP/1.1" 200 0
+Bad Request: /api/auth/register/
+"POST /api/auth/register/ HTTP/1.1" 400 198
+"OPTIONS /api/auth/register/ HTTP/1.1" 200 0
+Bad Request: /api/auth/register/
+"POST /api/auth/register/ HTTP/1.1" 400 198
+"OPTIONS /api/auth/register/ HTTP/1.1" 200 0
+Bad Request: /api/auth/register/
+"POST /api/auth/register/ HTTP/1.1" 400 198
+Bad Request: /api/auth/login/
+"POST /api/auth/login/ HTTP/1.1" 400 44

@@ -1,0 +1,215 @@
+/* src/components/artwork/ArtworkDetail.css */
+
+.artwork-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    background-color: #f8fefa;
+    min-height: calc(100vh - 120px);
+  }
+  
+  .artwork-detail-card {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    max-width: 1000px;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  @media (max-width: 768px) {
+    .artwork-detail-card {
+      flex-direction: column;
+    }
+  }
+  
+  .artwork-image-container {
+    flex: 1;
+    min-width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e6edf4;
+    padding: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .artwork-image-container {
+      min-width: unset;
+      width: 100%;
+      max-height: 400px;
+    }
+  }
+  
+  .artwork-image {
+    max-width: 100%;
+    max-height: 500px;
+    border-radius: 8px;
+    object-fit: contain;
+  }
+  
+  .artwork-info-container {
+    flex: 1.2;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .artwork-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #0c151d;
+    margin: 0;
+    line-height: 1.2;
+  }
+  
+  .artwork-artist {
+    font-size: 18px;
+    color: #6b7280;
+    margin: 0;
+  }
+  
+  .artwork-artist-link {
+    color: #4574a1;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .artwork-artist-link:hover {
+    text-decoration: underline;
+  }
+  
+  .artwork-price {
+    font-size: 28px;
+    font-weight: bold;
+    color: #0c151d;
+    margin: 10px 0 20px 0;
+  }
+  
+  .artwork-actions {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .artwork-button {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.2s ease;
+    background-color: #4574a1;
+    color: #ffffff;
+  }
+  
+  .artwork-button.not-for-sale {
+    background-color: #e6edf4;
+    color: #9ca3af;
+    cursor: not-allowed;
+  }
+  
+  .artwork-button.added-to-cart {
+    background-color: #28a745;
+  }
+  
+  .artwork-icon-button {
+    background-color: #ffffff;
+    border: 1px solid #e6edf4;
+    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #6b7280;
+  }
+  
+  .artwork-icon-button.liked {
+    color: #dc3545;
+    border: 1px solid #dc3545;
+  }
+  
+  .artwork-icon-button:hover {
+    border-color: #4574a1;
+    color: #4574a1;
+  }
+  
+  .artwork-icon-button.liked:hover {
+    border-color: #dc3545;
+    color: #dc3545;
+  }
+  
+  .artwork-details-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e6edf4;
+  }
+  
+  .artwork-section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #0c151d;
+    margin-bottom: 10px;
+  }
+  
+  .artwork-description {
+    font-size: 16px;
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  
+  .artwork-detail-item {
+    font-size: 15px;
+    color: #4574a1;
+    margin-bottom: 8px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .artwork-message {
+    font-size: 18px;
+    color: #6b7280;
+    text-align: center;
+  }
+  
+  .artwork-error-container {
+    padding: 40px 20px;
+    background-color: #f8fefa;
+    text-align: center;
+  }
+  
+  .artwork-error-message {
+    font-size: 18px;
+    color: #dc3545;
+  }
+  
+  .artwork-back-button {
+    background-color: #4574a1;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+  }
+  
+  .artwork-back-button:hover {
+    background-color: #3a5d84;
+  }

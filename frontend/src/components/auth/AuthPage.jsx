@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, User, Mail, Lock, Palette } from 'lucide-react';
 import { useAuth } from '../auth/AuthContext';
-import authService from '../../services/authService';
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -10,7 +9,7 @@ const AuthPage = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const { login } = useAuth();
+  const { login, register } = useAuth();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -29,7 +28,7 @@ const AuthPage = () => {
       ...prev,
       [name]: value
     }));
-    setError(''); // Clear error when user starts typing
+    setError('');
   };
 
   const handleSubmit = async (e) => {
@@ -39,19 +38,21 @@ const AuthPage = () => {
 
     try {
       if (isLogin) {
-        const response = await authService.login(formData.email, formData.password);
-        login(response.user, response.token);
-        navigate('/');
+        await login(formData.email, formData.password);
       } else {
         if (formData.password !== formData.password_confirm) {
           throw new Error("Passwords don't match");
         }
-        const response = await authService.register(formData);
-        login(response.user, response.token);
-        navigate('/');
+        
+        const registrationData = {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password
+        };
+        await register(registrationData);
       }
-    } catch (error) {
-      setError(error.message || 'Authentication failed');
+    } catch (err) {
+      setError(err.message || 'Authentication failed');
     } finally {
       setLoading(false);
     }

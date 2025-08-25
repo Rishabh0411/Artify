@@ -22,7 +22,15 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        register(formData);
+
+        // This is the crucial fix: create a new object with only the required fields
+        const registrationData = {
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+        };
+
+        register(registrationData);
     };
 
     return (
