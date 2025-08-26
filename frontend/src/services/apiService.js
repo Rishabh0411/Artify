@@ -1,169 +1,190 @@
-import authService from './authService';
+// Add these methods to your existing apiService.js file
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const apiService = {
+  // ... your existing methods ...
 
-class ApiService {
-  async request(url, options = {}) {
-    const config = {
+  // Profile-related methods
+  getCurrentUserProfile: async () => {
+    const response = await fetch(`${API_BASE_URL}/api/profile/`, {
       headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
         'Content-Type': 'application/json',
-        ...options.headers,
       },
-      ...options,
-    };
+    });
 
-    // Add auth token if available
-    if (authService.isAuthenticated()) {
-      config.headers.Authorization = `Token ${authService.getToken()}`;
+    if (!response.ok) {
+      throw new Error('Failed to fetch profile');
     }
 
-    try {
-      const response = await fetch(`${API_BASE_URL}${url}`, config);
-      
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.detail || `HTTP ${response.status}: ${response.statusText}`);
-      }
+    return response.json();
+  },
 
-      return await response.json();
-    } catch (error) {
-      throw error;
+  getUserProfile: async (username) => {
+    const response = await fetch(`${API_BASE_URL}/api/profile/${username}/`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch user profile');
     }
-  }
 
-  // Artworks
-  async getArtworks(params = {}) {
-    const searchParams = new URLSearchParams(params);
-    return this.request(`/artworks/?${searchParams}`);
-  }
+    return response.json();
+  },
 
-  async getArtwork(id) {
-    return this.request(`/artworks/${id}/`);
-  }
-
-  async createArtwork(artworkData) {
-    const formData = new FormData();
-    Object.keys(artworkData).forEach(key => {
-      if (key === 'uploaded_images' && Array.isArray(artworkData[key])) {
-        artworkData[key].forEach((image, index) => {
-          formData.append('uploaded_images', image);
-        });
-      } else if (artworkData[key] !== null && artworkData[key] !== undefined) {
-        formData.append(key, artworkData[key]);
-      }
+  updateUserProfile: async (profileData) => {
+    const response = await fetch(`${API_BASE_URL}/api/profile/`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(profileData),
     });
 
-    return this.request('/artworks/create/', {
+    if (!response.ok) {
+      throw new Error('Failed to update profile');
+    }
+
+    return response.json();
+  },
+
+  getArtworksByArtist: async (artistId) => {
+    const response = await fetch(`${API_BASE_URL}/api/artworks/?artist=${artistId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch artist artworks');
+    }
+
+    return response.json();
+  },
+
+  getUserOrders: async () => {
+    const response = await fetch(`${API_BASE_URL}/api/orders/`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch orders');
+    }
+
+    return response.json();
+  },
+
+  // Cart-related methods
+  getCart: async () => {
+    const response = await fetch(`${API_BASE_URL}/api/cart/`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch cart');
+    }
+
+    return response.json();
+  },
+
+  // Order-related methods
+  createOrder: async (orderData) => {
+    const response = await fetch(`${API_BASE_URL}/api/orders/`, {
       method: 'POST',
-      headers: {}, // Remove Content-Type to let browser set boundary for FormData
-      body: formData,
-    });
-  }
-
-  async updateArtwork(id, artworkData) {
-    const formData = new FormData();
-    Object.keys(artworkData).forEach(key => {
-      if (key === 'uploaded_images' && Array.isArray(artworkData[key])) {
-        artworkData[key].forEach((image) => {
-          formData.append('uploaded_images', image);
-        });
-      } else if (artworkData[key] !== null && artworkData[key] !== undefined) {
-        formData.append(key, artworkData[key]);
-      }
-    });
-
-    return this.request(`/artworks/${id}/update/`, {
-      method: 'PATCH',
-      headers: {},
-      body: formData,
-    });
-  }
-
-  async deleteArtwork(id) {
-    return this.request(`/artworks/${id}/delete/`, { method: 'DELETE' });
-  }
-
-  async likeArtwork(id) {
-    return this.request(`/artworks/${id}/like/`, { method: 'POST' });
-  }
-
-  async getFeaturedArtworks() {
-    return this.request('/artworks/featured/');
-  }
-
-  async getMyArtworks() {
-    return this.request('/artworks/my-artworks/');
-  }
-
-  // Cart
-  async getCart() {
-    return this.request('/orders/cart/');
-  }
-
-  async addToCart(artworkId) {
-    return this.request('/orders/cart/add/', {
-      method: 'POST',
-      body: JSON.stringify({ artwork_id: artworkId }),
-    });
-  }
-
-  async removeFromCart(artworkId) {
-    return this.request(`/orders/cart/remove/${artworkId}/`, { method: 'DELETE' });
-  }
-
-  // Wishlist
-  async getWishlist() {
-    return this.request('/orders/wishlist/');
-  }
-
-  async addToWishlist(artworkId) {
-    return this.request('/orders/wishlist/add/', {
-      method: 'POST',
-      body: JSON.stringify({ artwork_id: artworkId }),
-    });
-  }
-
-  async removeFromWishlist(artworkId) {
-    return this.request(`/orders/wishlist/remove/${artworkId}/`, { method: 'DELETE' });
-  }
-
-  // Orders
-  async getOrders() {
-    return this.request('/orders/orders/');
-  }
-
-  async getOrder(id) {
-    return this.request(`/orders/orders/${id}/`);
-  }
-
-  async createOrder(orderData) {
-    return this.request('/orders/orders/create/', {
-      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(orderData),
     });
-  }
 
-  async processPayment(orderId, paymentData) {
-    return this.request(`/orders/orders/${orderId}/payment/`, {
+    if (!response.ok) {
+      throw new Error('Failed to create order');
+    }
+
+    return response.json();
+  },
+
+  processPayment: async (orderId, paymentData) => {
+    const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/payment/`, {
       method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(paymentData),
     });
-  }
 
-  // Categories
-  async getCategories() {
-    return this.request('/auth/categories/');
-  }
+    if (!response.ok) {
+      throw new Error('Failed to process payment');
+    }
 
-  // Tags
-  async getTags() {
-    return this.request('/auth/tags/');
-  }
+    return response.json();
+  },
 
-  // Users
-  async getUser(id) {
-    return this.request(`/auth/users/${id}/`);
-  }
-}
+  // Temporary fallback methods (remove when backend is ready)
+  
+  // Mock method for profile - replace with real API when ready
+  getCurrentUserProfileMock: async () => {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return {
+      id: user.user_id || 1,
+      username: user.username || 'user',
+      first_name: user.first_name || 'John',
+      last_name: user.last_name || 'Doe',
+      email: user.email || 'john@example.com',
+      user_type: user.user_type || 'buyer',
+      bio: 'Art enthusiast and collector.',
+      location: 'New York, USA',
+      phone: '+1-555-0123',
+      date_joined: '2024-01-15T10:30:00Z',
+      profile_picture: null,
+      website: '',
+      instagram: '',
+      twitter: ''
+    };
+  },
 
-export default new ApiService();
+  // Mock method for user orders
+  getUserOrdersMock: async () => {
+    return {
+      results: [
+        {
+          id: 1,
+          order_number: 'ORD-2024-001',
+          status: 'delivered',
+          total_amount: '5000.00',
+          created_at: '2024-01-20T14:30:00Z'
+        },
+        {
+          id: 2,
+          order_number: 'ORD-2024-002',
+          status: 'shipped',
+          total_amount: '3500.00',
+          created_at: '2024-01-25T09:15:00Z'
+        }
+      ]
+    };
+  },
+
+  // Use mock methods until backend is ready
+  getCurrentUserProfile: function() {
+    return this.getCurrentUserProfileMock();
+  },
+
+  getUserOrders: function() {
+    return this.getUserOrdersMock();
+  }
+};
+
+export default apiService;

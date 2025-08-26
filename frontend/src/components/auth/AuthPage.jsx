@@ -40,19 +40,50 @@ const AuthPage = () => {
       if (isLogin) {
         await login(formData.email, formData.password);
       } else {
+        // Client-side validation
         if (formData.password !== formData.password_confirm) {
           throw new Error("Passwords don't match");
         }
         
+        if (formData.password.length < 8) {
+          throw new Error("Password must be at least 8 characters long");
+        }
+        
+        // Prepare registration data with all required fields
         const registrationData = {
-          username: formData.username,
-          email: formData.email,
-          password: formData.password
+          username: formData.username.trim(),
+          email: formData.email.trim(),
+          password: formData.password,
+          password_confirm: formData.password_confirm,
+          first_name: formData.first_name.trim(),
+          last_name: formData.last_name.trim(),
+          user_type: formData.user_type
         };
+
+        // Validate required fields
+        if (!registrationData.username || !registrationData.first_name || !registrationData.last_name) {
+          throw new Error("Please fill in all required fields");
+        }
+
         await register(registrationData);
       }
     } catch (err) {
-      setError(err.message || 'Authentication failed');
+      console.error('Auth Error:', err);
+      let errorMessage = 'Authentication failed';
+      
+      if (err.message) {
+        errorMessage = err.message;
+      } else if (err.password) {
+        errorMessage = Array.isArray(err.password) ? err.password[0] : err.password;
+      } else if (err.password_confirm) {
+        errorMessage = Array.isArray(err.password_confirm) ? err.password_confirm[0] : err.password_confirm;
+      } else if (err.username) {
+        errorMessage = Array.isArray(err.username) ? err.username[0] : err.username;
+      } else if (err.email) {
+        errorMessage = Array.isArray(err.email) ? err.email[0] : err.email;
+      }
+      
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -105,7 +136,7 @@ const AuthPage = () => {
             <>
               <div style={styles.inputRow}>
                 <div style={styles.inputGroup}>
-                  <label style={styles.label}>First Name</label>
+                  <label style={styles.label}>First Name *</label>
                   <div style={styles.inputContainer}>
                     <User size={18} style={styles.inputIcon} />
                     <input
@@ -120,7 +151,7 @@ const AuthPage = () => {
                   </div>
                 </div>
                 <div style={styles.inputGroup}>
-                  <label style={styles.label}>Last Name</label>
+                  <label style={styles.label}>Last Name *</label>
                   <div style={styles.inputContainer}>
                     <User size={18} style={styles.inputIcon} />
                     <input
@@ -137,7 +168,7 @@ const AuthPage = () => {
               </div>
 
               <div style={styles.inputGroup}>
-                <label style={styles.label}>Username</label>
+                <label style={styles.label}>Username *</label>
                 <div style={styles.inputContainer}>
                   <User size={18} style={styles.inputIcon} />
                   <input
@@ -168,7 +199,7 @@ const AuthPage = () => {
           )}
 
           <div style={styles.inputGroup}>
-            <label style={styles.label}>Email Address</label>
+            <label style={styles.label}>Email Address *</label>
             <div style={styles.inputContainer}>
               <Mail size={18} style={styles.inputIcon} />
               <input
@@ -184,7 +215,7 @@ const AuthPage = () => {
           </div>
 
           <div style={styles.inputGroup}>
-            <label style={styles.label}>Password</label>
+            <label style={styles.label}>Password *</label>
             <div style={styles.inputContainer}>
               <Lock size={18} style={styles.inputIcon} />
               <input
@@ -194,6 +225,7 @@ const AuthPage = () => {
                 onChange={handleInputChange}
                 placeholder="••••••••"
                 style={styles.input}
+                minLength={8}
                 required
               />
               <button
@@ -204,11 +236,16 @@ const AuthPage = () => {
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
+            {!isLogin && (
+              <div style={styles.passwordHint}>
+                Password must be at least 8 characters long
+              </div>
+            )}
           </div>
 
           {!isLogin && (
             <div style={styles.inputGroup}>
-              <label style={styles.label}>Confirm Password</label>
+              <label style={styles.label}>Confirm Password *</label>
               <div style={styles.inputContainer}>
                 <Lock size={18} style={styles.inputIcon} />
                 <input
@@ -218,6 +255,7 @@ const AuthPage = () => {
                   onChange={handleInputChange}
                   placeholder="••••••••"
                   style={styles.input}
+                  minLength={8}
                   required
                 />
                 <button
@@ -327,6 +365,7 @@ const styles = {
     marginBottom: '24px',
     fontSize: '14px',
     textAlign: 'center',
+    border: '1px solid #fecaca',
   },
   form: {
     display: 'flex',
@@ -368,6 +407,7 @@ const styles = {
     transition: 'border-color 0.2s ease',
     outline: 'none',
     backgroundColor: '#ffffff',
+    boxSizing: 'border-box',
   },
   select: {
     width: '100%',
@@ -379,6 +419,7 @@ const styles = {
     outline: 'none',
     backgroundColor: '#ffffff',
     cursor: 'pointer',
+    boxSizing: 'border-box',
   },
   eyeButton: {
     position: 'absolute',
@@ -391,6 +432,11 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  passwordHint: {
+    fontSize: '12px',
+    color: '#6b7280',
+    marginTop: '4px',
   },
   forgotPassword: {
     textAlign: 'right',

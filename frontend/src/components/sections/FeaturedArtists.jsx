@@ -77,7 +77,6 @@ const FeaturedArtists = () => {
         fontSize: '22px',
         fontWeight: 'bold',
         padding: '20px 16px 12px 16px',
-        margin: 0,
         maxWidth: '1200px',
         margin: '20px auto 12px auto',
         paddingLeft: '24px' 

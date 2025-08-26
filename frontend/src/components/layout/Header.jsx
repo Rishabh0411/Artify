@@ -21,7 +21,6 @@ const Header = () => {
 
   const handleLogout = () => {
     logout();
-
   };
 
   return (
@@ -67,22 +66,6 @@ const Header = () => {
                 Shop
               </Link>
             </li>
-            {/* Add more navigation links as needed */}
-            {/* <li>
-              <Link 
-                to="/artists" 
-                style={{ 
-                  textDecoration: 'none', 
-                  fontSize: '16px', 
-                  fontWeight: '500', 
-                  color: isActive('/artists') ? '#4574a1' : '#6b7280',
-                  transition: 'color 0.2s ease',
-                  '&:hover': { color: '#4574a1' }
-                }}
-              >
-                Artists
-              </Link>
-            </li> */}
           </ul>
         </nav>
       </div>
@@ -187,7 +170,7 @@ const Header = () => {
         </Link>
 
         {/* Auth/Profile Section */}
-        {isAuthenticated ? (
+        {isAuthenticated && user ? (
           <>
             <Link to={`/profile/${user.id}`} style={{ textDecoration: 'none' }}>
               <div

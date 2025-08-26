@@ -30,3 +30,32 @@ Bad Request: /api/auth/register/
 "POST /api/auth/register/ HTTP/1.1" 400 198
 Bad Request: /api/auth/login/
 "POST /api/auth/login/ HTTP/1.1" 400 44
+Watching for file changes with StatReloader
+"OPTIONS /api/auth/register/ HTTP/1.1" 200 0
+Bad Request: /api/auth/register/
+"POST /api/auth/register/ HTTP/1.1" 400 198
+"OPTIONS /api/auth/register/ HTTP/1.1" 200 0
+Bad Request: /api/auth/register/
+"POST /api/auth/register/ HTTP/1.1" 400 198
+"OPTIONS /api/auth/register/ HTTP/1.1" 200 0
+Bad Request: /api/auth/register/
+"POST /api/auth/register/ HTTP/1.1" 400 198
+"OPTIONS /api/register/ HTTP/1.1" 200 0
+Not Found: /api/register/
+"POST /api/register/ HTTP/1.1" 404 2855
+"OPTIONS /api/auth/register/ HTTP/1.1" 200 0
+Bad Request: /api/auth/register/
+"POST /api/auth/register/ HTTP/1.1" 400 198
+/home/rishabh/Desktop/Projects/Artify/backend/art_marketplace/settings.py changed, reloading.
+Watching for file changes with StatReloader
+"OPTIONS /api/auth/register/ HTTP/1.1" 200 0
+Bad Request: /api/auth/register/
+"POST /api/auth/register/ HTTP/1.1" 400 82
+"OPTIONS /api/auth/register/ HTTP/1.1" 200 0
+"POST /api/auth/register/ HTTP/1.1" 201 599
+"OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+"POST /api/auth/login/ HTTP/1.1" 200 599
+"OPTIONS /api/auth/logout/ HTTP/1.1" 200 0
+"POST /api/auth/logout/ HTTP/1.1" 200 37
+"OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+"POST /api/auth/login/ HTTP/1.1" 200 599

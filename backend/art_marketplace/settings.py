@@ -64,7 +64,29 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOW_ALL_ORIGINS = DEBUG  # Only in development
+CORS_ALLOW_ALL_ORIGINS = True  # Only in development
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+# Methods that should be allowed
+CORS_ALLOWED_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
 
 # Django REST Framework Settings
 REST_FRAMEWORK = {
