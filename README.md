@@ -1,125 +1,110 @@
-# 🎨 Artify - Art Marketplace E-commerce Platform
+# 🎨 Artify - Online Art Marketplace
 
-A modern, full-stack e-commerce platform specifically designed for artists to sell their artwork and art enthusiasts to discover and purchase unique pieces. Built with Django REST Framework and React.js.
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
+[![Django](https://img.shields.io/badge/Django-5.2+-green.svg)](https://djangoproject.com)
+[![React](https://img.shields.io/badge/React-19+-blue.svg)](https://react.dev)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## ✨ Features
+A modern, full-stack online art marketplace where artists can showcase and sell their artwork while buyers can discover and purchase unique pieces. Built with Django REST Framework backend and React frontend.
+
+## 🌟 Features
 
 ### For Artists
-- 🎯 **Artist Dashboard** - Manage your artwork portfolio
-- 📸 **Multi-Image Upload** - Showcase your art with multiple high-quality images
-- 💰 **Pricing Control** - Set your own prices and availability
-- 📊 **Analytics** - Track views, likes, and earnings
-- ✅ **Order Management** - Manage sales and track commissions
-- 🏆 **Artist Verification** - Get verified artist status
+- 🎯 **Portfolio Management**: Create and manage artwork portfolios with multi-image uploads
+- 📊 **Sales Dashboard**: Track sales, earnings, and comprehensive analytics  
+- 🏆 **Artist Verification**: Verified artist badges and enhanced profiles
+- 💰 **Pricing Control**: Set and modify artwork prices with dynamic availability
+- 📸 **Multiple Images**: Upload multiple high-quality images per artwork
 
 ### For Buyers
-- 🔍 **Advanced Search & Filtering** - Find art by category, price, medium, and more
-- ❤️ **Wishlist** - Save favorite artworks for later
-- 🛒 **Shopping Cart** - Seamless shopping experience
-- 💳 **Secure Checkout** - Multiple payment options with SSL encryption
-- 📦 **Order Tracking** - Track your purchases from confirmation to delivery
-- ⭐ **Reviews & Ratings** - Rate and review purchased artwork
+- 🔍 **Advanced Search**: Search by artist, medium, price range, category and more
+- 📚 **Collections**: Create personal artwork collections and wishlists
+- ⭐ **Reviews & Ratings**: Rate and review purchased artworks
+- 💳 **Secure Payments**: Stripe integration for secure transactions
+- 🛒 **Shopping Cart**: Seamless shopping experience with order tracking
 
 ### Platform Features
-- 🔐 **Secure Authentication** - JWT token-based authentication
-- 📱 **Responsive Design** - Optimized for desktop and mobile
-- 🎨 **Modern UI/UX** - Clean, intuitive interface
-- 🔒 **Data Security** - Encrypted data transmission and storage
-- 📈 **Admin Dashboard** - Comprehensive admin panel for platform management
-- 🌟 **Featured Artworks** - Promote selected pieces on homepage
+- 🔐 **User Authentication**: JWT-based secure authentication system
+- 🔔 **Real-time Notifications**: In-app and email notifications
+- 📱 **Responsive Design**: Mobile-first responsive UI
+- 📚 **API Documentation**: Comprehensive REST API with Swagger UI
+- 📈 **Admin Dashboard**: Full admin control panel for platform management
+- ⚡ **Performance Optimized**: Redis caching and database optimization
 
-## 🛠️ Tech Stack
+## 🏗️ Architecture
 
-### Backend
-- **Framework**: Django 5.2.4 + Django REST Framework
-- **Database**: PostgreSQL (SQLite for development)
-- **Authentication**: Token-based authentication
-- **Media Storage**: Local storage (configurable for AWS S3)
-- **API Documentation**: Built-in Django admin + DRF browsable API
-
-### Frontend
-- **Framework**: React 18+ with Vite
-- **Routing**: React Router DOM
-- **Styling**: CSS-in-JS (styled components approach)
-- **Icons**: Lucide React
-- **HTTP Client**: Fetch API with custom service layer
-
-### DevOps & Deployment
-- **Containerization**: Docker & Docker Compose
-- **Web Server**: Nginx (production)
-- **WSGI Server**: Gunicorn
-- **Caching**: Redis (optional)
-- **Monitoring**: Django logging framework
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   React Frontend │    │  Django Backend │    │   PostgreSQL    │
+│                 │────│                 │────│    Database     │
+│  - Components   │    │  - REST API     │    │                 │
+│  - State Mgmt   │    │  - Models       │    │  - User Data    │
+│  - Routing      │    │  - Views        │    │  - Artworks     │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         │              ┌─────────────────┐             │
+         │              │      Redis      │             │
+         └──────────────│     Cache       │─────────────┘
+                        │  - Sessions     │
+                        │  - Notifications│
+                        └─────────────────┘
+```
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.10+
-- Node.js 16+
-- PostgreSQL (for production)
+- Python 3.11+
+- Node.js 18+
+- PostgreSQL 13+ (or SQLite for development)
+- Redis 7+ (optional, for caching)
 - Git
 
-### Backend Setup
+### 1. Clone the Repository
+```bash
+git clone https://github.com/Rishabh0411/Artify.git
+cd Artify
+```
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/artify-marketplace.git
-   cd artify-marketplace
-   ```
+### 2. Backend Setup
+```bash
+cd backend
 
-2. **Set up Python environment**
-   ```bash
-   cd backend
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+# Install dependencies
+pip install -r requirements.txt
 
-4. **Environment configuration**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
+# Environment configuration
+cp .env.example .env
+# Edit .env file with your configuration
 
-5. **Database setup**
-   ```bash
-   python manage.py makemigrations
-   python manage.py migrate
-   python manage.py createsuperuser
-   ```
+# Database setup
+python manage.py migrate
 
-6. **Load sample data (optional)**
-   ```bash
-   python manage.py create_sample_data
-   ```
+# Create superuser
+python manage.py createsuperuser
 
-7. **Run development server**
-   ```bash
-   python manage.py runserver
-   ```
+# Load sample data (optional)
+python manage.py create_sample_data
 
-### Frontend Setup
+# Start development server
+python manage.py runserver
+```
 
-1. **Navigate to frontend directory**
-   ```bash
-   cd frontend
-   ```
+### 3. Frontend Setup
+```bash
+cd frontend
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+# Install dependencies
+npm install
 
-3. **Start development server**
-   ```bash
-   npm run dev
-   ```
+# Start development server
+npm run dev
+```
 
-### Access the Application
+### 4. Access the Application
 - **Frontend**: http://localhost:5173
 - **Backend API**: http://localhost:8000/api/
 - **Admin Panel**: http://localhost:8000/admin/
@@ -127,23 +112,24 @@ A modern, full-stack e-commerce platform specifically designed for artists to se
 ## 📁 Project Structure
 
 ```
-artify-marketplace/
+Artify/
 ├── backend/
 │   ├── art_marketplace/          # Django project settings
 │   ├── core/                     # User management & core models
 │   ├── artworks/                 # Artwork management
 │   ├── orders/                   # Shopping cart & orders
+│   ├── notification_system/      # Notification management
 │   ├── media/                    # User uploaded files
 │   ├── static/                   # Static files
 │   ├── requirements.txt
-│   └── manage.py
+│   ├── manage.py
+│   └── deploy.sh                 # Deployment script
 ├── frontend/
 │   ├── src/
 │   │   ├── components/           # React components
 │   │   │   ├── auth/            # Authentication
 │   │   │   ├── artist/          # Artist dashboard
 │   │   │   ├── cart/            # Shopping cart
-│   │   │   ├── checkout/        # Checkout process
 │   │   │   ├── layout/          # Header, Footer
 │   │   │   ├── orders/          # Order management
 │   │   │   └── shop/            # Product browsing
@@ -157,35 +143,33 @@ artify-marketplace/
 └── README.md
 ```
 
-## 🔧 Configuration
-
-### Environment Variables
+## 📋 Environment Variables
 
 Create a `.env` file in the backend directory:
 
 ```env
 # Django Configuration
 DEBUG=True
-SECRET_KEY=your-super-secret-key-here
+SECRET_KEY=your-secret-key-here
 ALLOWED_HOSTS=localhost,127.0.0.1
 
-# Database Configuration
-DB_NAME=artify_db
-DB_USER=artify_user
-DB_PASSWORD=secure-password
-DB_HOST=localhost
-DB_PORT=5432
+# Database Configuration (PostgreSQL)
+DATABASE_URL=postgresql://user:password@localhost:5432/artify
 
 # Email Configuration
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
 EMAIL_HOST_USER=your-email@gmail.com
 EMAIL_HOST_PASSWORD=your-app-password
 
-# Redis Configuration (optional)
-REDIS_URL=redis://127.0.0.1:6379/1
+# Redis Configuration
+REDIS_URL=redis://localhost:6379/0
 
-# Payment Gateway (optional)
-STRIPE_PUBLIC_KEY=pk_test_...
-STRIPE_SECRET_KEY=sk_test_...
+# Stripe Configuration
+STRIPE_PUBLIC_KEY=pk_test_your_stripe_public_key
+STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
 ```
 
 ### Frontend Configuration
@@ -205,7 +189,7 @@ const API_BASE_URL = 'http://localhost:8000/api';  // Development
 - **Admin**: Full platform management access
 
 ### API Authentication
-- Token-based authentication using Django REST Framework tokens
+- JWT-based authentication using Django REST Framework Simple JWT
 - Tokens are stored in localStorage on the frontend
 - Protected routes require valid authentication tokens
 
@@ -220,7 +204,39 @@ Buyer Account:
 - Password: samplepassword123
 ```
 
-## 📚 API Documentation
+## 🔧 Development
+
+### Running Tests
+```bash
+# Backend tests
+cd backend
+python manage.py test
+
+# Frontend tests (if implemented)
+cd frontend
+npm run test
+```
+
+### Code Quality
+```bash
+# Backend linting and formatting
+cd backend
+flake8 .
+black .
+
+# Frontend linting
+cd frontend
+npm run lint
+```
+
+### Database Migrations
+```bash
+cd backend
+python manage.py makemigrations
+python manage.py migrate
+```
+
+## � API Documentation
 
 ### Main Endpoints
 
@@ -248,120 +264,114 @@ Buyer Account:
 - `GET /api/orders/orders/` - List user's orders
 - `POST /api/orders/orders/create/` - Create new order
 - `GET /api/orders/orders/{id}/` - Get order details
-- `POST /api/orders/orders/{id}/payment/` - Process payment
 
-## 🧪 Testing
+### Sample API Requests
 
-### Backend Tests
 ```bash
-cd backend
-python manage.py test
+# Register user
+POST /api/auth/register/
+{
+  "username": "artist1",
+  "email": "artist@example.com",
+  "password": "secure_password",
+  "user_type": "artist"
+}
+
+# Login
+POST /api/auth/login/
+{
+  "email": "artist@example.com",
+  "password": "secure_password"
+}
+
+# Create artwork
+POST /api/artworks/
+{
+  "title": "Beautiful Sunset",
+  "description": "A stunning sunset painting",
+  "price": "299.99",
+  "medium": "Oil on Canvas"
+}
 ```
 
-### Frontend Tests
+Full API documentation available at: `/api/schema/swagger-ui/`
+
+## � Deployment
+
+### Using Docker (Recommended)
 ```bash
-cd frontend
-npm test
+# Build and start services
+docker-compose up -d --build
+
+# Run migrations
+docker-compose exec web python manage.py migrate
+
+# Create superuser
+docker-compose exec web python manage.py createsuperuser
 ```
-
-## 🚀 Deployment
-
-### Using Docker
-
-1. **Build and run with Docker Compose**
-   ```bash
-   docker-compose up -d --build
-   ```
-
-2. **Run migrations in container**
-   ```bash
-   docker-compose exec web python manage.py migrate
-   docker-compose exec web python manage.py createsuperuser
-   ```
 
 ### Manual Deployment
+1. **Server Setup**: Ubuntu 20.04+ with Python 3.11+
+2. **Dependencies**: Install PostgreSQL, Redis, Nginx
+3. **Application**: Use the provided `deploy.sh` script
+4. **Web Server**: Configure Nginx with provided config
+5. **SSL**: Set up SSL certificates (Let's Encrypt recommended)
 
-#### Backend (Ubuntu/CentOS)
+### Environment-Specific Settings
+- **Development**: DEBUG=True, SQLite database
+- **Staging**: DEBUG=False, PostgreSQL, limited features
+- **Production**: All security headers, HTTPS, full monitoring
 
-1. **Install system dependencies**
-   ```bash
-   sudo apt update
-   sudo apt install python3-pip python3-venv postgresql nginx
-   ```
+## 🛡️ Security Features
 
-2. **Set up application**
-   ```bash
-   git clone https://github.com/yourusername/artify-marketplace.git
-   cd artify-marketplace/backend
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
+- **JWT Authentication**: Secure token-based authentication
+- **Rate Limiting**: API endpoint rate limiting
+- **CORS Configuration**: Properly configured CORS headers  
+- **SQL Injection Protection**: Django ORM prevents SQL injection
+- **XSS Protection**: Content Security Policy headers
+- **HTTPS Enforcement**: SSL/TLS encryption in production
+- **Input Validation**: Comprehensive input sanitization
 
-3. **Configure database**
-   ```bash
-   sudo -u postgres createdb artify_db
-   sudo -u postgres createuser artify_user
-   ```
+## 🔧 Tech Stack
 
-4. **Run migrations**
-   ```bash
-   python manage.py migrate
-   python manage.py collectstatic
-   ```
+### Backend
+- **Framework**: Django 5.2 + Django REST Framework
+- **Database**: PostgreSQL 15 (SQLite for development)
+- **Cache**: Redis 7
+- **Authentication**: JWT tokens (djangorestframework-simplejwt)
+- **File Storage**: Local/AWS S3 compatible
+- **Payments**: Stripe integration
 
-5. **Set up Gunicorn service**
-   ```bash
-   sudo nano /etc/systemd/system/artify.service
-   ```
+### Frontend  
+- **Framework**: React 19
+- **Build Tool**: Vite 7
+- **Routing**: React Router
+- **State Management**: Context API
+- **Styling**: CSS Modules
+- **HTTP Client**: Fetch API
 
-6. **Configure Nginx**
-   ```bash
-   sudo nano /etc/nginx/sites-available/artify
-   sudo ln -s /etc/nginx/sites-available/artify /etc/nginx/sites-enabled/
-   sudo systemctl restart nginx
-   ```
-
-#### Frontend
-
-1. **Build for production**
-   ```bash
-   cd frontend
-   npm run build
-   ```
-
-2. **Deploy to web server**
-   ```bash
-   # Copy dist/ folder to your web server
-   scp -r dist/* user@server:/var/www/artify/
-   ```
+### Infrastructure
+- **Containerization**: Docker & Docker Compose
+- **Web Server**: Nginx
+- **Process Manager**: Gunicorn
+- **Monitoring**: Built-in logging
+- **CI/CD**: GitHub Actions ready
 
 ## 🤝 Contributing
 
-We welcome contributions! Please follow these steps:
-
-1. **Fork the repository**
-2. **Create a feature branch**
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-3. **Commit your changes**
-   ```bash
-   git commit -m 'Add some amazing feature'
-   ```
-4. **Push to the branch**
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-5. **Open a Pull Request**
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ### Development Guidelines
-
 - Follow PEP 8 for Python code
 - Use ESLint configuration for JavaScript
 - Write tests for new features
-- Update documentation as needed
-- Ensure responsive design for UI changes
+- Update documentation
+- Use semantic commit messages
+>>>>>>> b4166f32 (Finalized)
 
 ## 📄 License
 
@@ -378,41 +388,46 @@ A: Make sure your frontend URL is added to `CORS_ALLOWED_ORIGINS` in Django sett
 A: Check that `MEDIA_URL` and `MEDIA_ROOT` are configured correctly and the media directory has proper permissions.
 
 **Q: Payment processing fails**
-A: The default implementation is a simulation. Integrate with a real payment gateway like Stripe or Razorpay for production.
+A: The default implementation is a simulation. Integrate with a real payment gateway like Stripe for production.
 
 ### Getting Help
 
+- � **Documentation**: [Wiki](https://github.com/Rishabh0411/Artify/wiki)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/Rishabh0411/Artify/issues)
+- � **Discussions**: [GitHub Discussions](https://github.com/Rishabh0411/Artify/discussions)
 - 📧 **Email**: support@artify.com
-- 💬 **Discord**: [Artify Community](https://discord.gg/artify)
-- 🐛 **Issues**: [GitHub Issues](https://github.com/yourusername/artify-marketplace/issues)
-- 📖 **Documentation**: [Wiki](https://github.com/yourusername/artify-marketplace/wiki)
 
-## 🙏 Acknowledgments
-
-- Django REST Framework community
-- React.js team
-- Lucide Icons for beautiful icons
-- All the amazing artists who inspire creativity
-
-## 🔄 Roadmap
+## � Roadmap
 
 ### Version 2.0
-- [ ] Advanced analytics dashboard
-- [ ] Mobile app (React Native)
+- [ ] Mobile App (React Native)
 - [ ] AI-powered artwork recommendations
+- [ ] Virtual gallery tours
+- [ ] Blockchain NFT integration
+- [ ] Advanced analytics dashboard
 - [ ] Social features (artist following, comments)
 - [ ] Auction functionality
-- [ ] Multi-language support
 
 ### Version 1.1 (Next Release)
-- [ ] Email notifications
+- [ ] Multi-language support
 - [ ] Advanced search with image similarity
 - [ ] Bulk artwork upload
 - [ ] Artist commission tracking
 - [ ] Inventory management
 
+## ⭐ Acknowledgments
+
+- Django REST Framework community
+- React.js team
+- Lucide Icons for beautiful icons
+- All the amazing artists who inspire creativity
+- Contributors and testers
+- Open source libraries used
+
 ---
 
-**Built with ❤️ for the art community**
+**Made with ❤️ by [Rishabh](https://github.com/Rishabh0411)**
+
+*Artify - Where Art Meets Technology* 🎨✨
 
 *Star ⭐ this repository if you found it helpful!*

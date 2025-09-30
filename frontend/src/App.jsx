@@ -3,6 +3,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './components/auth/AuthContext';
 import { WishlistProvider } from './components/wishlist/WishlistContext';
 import { CartProvider } from './components/cart/CartContext';
+import { NotificationProvider } from './components/common/NotificationProvider';
+import ErrorBoundary from './components/common/ErrorBoundary';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import ProtectedRoute from './components/auth/ProtectedRoute';
@@ -23,17 +25,19 @@ import OrderDetail from './components/orders/OrderDetail';
 
 function App() {
   return (
-    <AuthProvider>
-      <WishlistProvider>
-        <CartProvider>
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            minHeight: '100vh',
-            fontFamily: 'system-ui, -apple-system, sans-serif'
-          }}>
-            <Header />
-            <main style={{ flex: 1 }}>
+    <ErrorBoundary>
+      <NotificationProvider>
+        <AuthProvider>
+          <WishlistProvider>
+            <CartProvider>
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: '100vh',
+                fontFamily: 'system-ui, -apple-system, sans-serif'
+              }}>
+                <Header />
+                <main style={{ flex: 1 }}>
               <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<Home />} />
@@ -121,6 +125,8 @@ function App() {
         </CartProvider>
       </WishlistProvider>
     </AuthProvider>
+    </NotificationProvider>
+    </ErrorBoundary>
   );
 }
 

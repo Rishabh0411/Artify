@@ -77,6 +77,16 @@ class Artwork(models.Model):
         main_image = self.images.filter(is_primary=True).first()
         return main_image.image.url if main_image else None
 
+    @property
+    def average_rating(self):
+        from django.db.models import Avg
+        avg = self.reviews.filter(is_published=True).aggregate(Avg('rating'))['rating__avg']
+        return round(avg, 1) if avg else 0.0
+
+    @property
+    def review_count(self):
+        return self.reviews.filter(is_published=True).count()
+
 
 class ArtworkImage(models.Model):
     artwork = models.ForeignKey(Artwork, on_delete=models.CASCADE, related_name='images')
@@ -123,3 +133,50 @@ class ArtworkView(models.Model):
 
     def __str__(self):
         return f"View of {self.artwork.title}"
+
+
+# Reviews are handled in orders.models.Review for verified purchases
+# Adding additional models for artwork interaction tracking
+
+class ArtworkCollection(models.Model):
+    """User collections/galleries for organizing favorite artworks"""
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='collections')
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    artworks = models.ManyToManyField(Artwork, blank=True, related_name='collections')
+    is_public = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('user', 'name')
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.name} by {self.user.full_name}"
+
+
+class ArtworkReport(models.Model):
+    """For reporting inappropriate content"""
+    REPORT_REASONS = [
+        ('inappropriate', 'Inappropriate Content'),
+        ('copyright', 'Copyright Violation'),
+        ('fake', 'Fake/Misleading'),
+        ('spam', 'Spam'),
+        ('other', 'Other'),
+    ]
+
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    artwork = models.ForeignKey(Artwork, on_delete=models.CASCADE, related_name='reports')
+    reason = models.CharField(max_length=20, choices=REPORT_REASONS)
+    description = models.TextField()
+    is_resolved = models.BooleanField(default=False)
+    admin_notes = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'artwork')
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Report by {self.user.full_name} for {self.artwork.title}"

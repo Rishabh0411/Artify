@@ -59,3 +59,26 @@ Bad Request: /api/auth/register/
 "POST /api/auth/logout/ HTTP/1.1" 200 37
 "OPTIONS /api/auth/login/ HTTP/1.1" 200 0
 "POST /api/auth/login/ HTTP/1.1" 200 599
+Watching for file changes with StatReloader
+"OPTIONS /api/auth/login/ HTTP/1.1" 200 0
+Bad Request: /api/auth/login/
+"POST /api/auth/login/ HTTP/1.1" 400 44
+Bad Request: /api/auth/login/
+"POST /api/auth/login/ HTTP/1.1" 400 44
+"OPTIONS /api/auth/register/ HTTP/1.1" 200 0
+Bad Request: /api/auth/register/
+"POST /api/auth/register/ HTTP/1.1" 400 139
+Bad Request: /api/auth/register/
+"POST /api/auth/register/ HTTP/1.1" 400 58
+"POST /api/auth/register/ HTTP/1.1" 201 602
+Watching for file changes with StatReloader
+Unauthorized: /api/artworks/create/
+Unauthorized: /api/auth/profile/
+Bad Request: /api/auth/login/
+Bad Request: /api/auth/register/
+Bad Request: /api/auth/register/
+Unauthorized: /api/artworks/create/
+Unauthorized: /api/auth/profile/
+Bad Request: /api/auth/login/
+Bad Request: /api/auth/register/
+Bad Request: /api/auth/register/
