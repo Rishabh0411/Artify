@@ -82,3 +82,10 @@ Unauthorized: /api/auth/profile/
 Bad Request: /api/auth/login/
 Bad Request: /api/auth/register/
 Bad Request: /api/auth/register/
+Watching for file changes with StatReloader
+Not Found: /api/
+"GET /api/ HTTP/1.1" 404 2827
+"GET /api/artworks/ HTTP/1.1" 200 52
+"GET /api/artworks/ HTTP/1.1" 200 52
+Method Not Allowed: /api/auth/register/
+"GET /api/auth/register/ HTTP/1.1" 405 40
